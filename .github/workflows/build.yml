@@ -10,7 +10,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Unzip project
-        run: unzip -q televizia_android_app.zip -d .
+         run: unzip -q televizia_app_update.zip -d .
+         
 
       - uses: actions/setup-java@v4
         with:
