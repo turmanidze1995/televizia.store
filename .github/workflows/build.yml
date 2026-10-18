@@ -11,7 +11,7 @@ jobs:
 
       - name: Unzip project
         run: |
-          unzip -o -q televizia_android_app_v1.7.28.zip -d .
+          unzip -o -q televizia_android_app_v1.7.29.zip -d .
           ls -la TelevizaApp
 
       - uses: actions/setup-java@v4
