@@ -3,6 +3,12 @@ name: Build APK
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+env:
+  VERSION: "1.7.39"   # <-- ახალ ვერსიაზე მხოლოდ ეს ხაზი შეცვალე (zip-ის სახელი: televizia_android_app_v<VERSION>.zip)
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,7 +17,7 @@ jobs:
 
       - name: Unzip project
         run: |
-          unzip -o -q televizia_android_app_v1.7.39.zip -d .
+          unzip -o -q televizia_android_app_v${VERSION}.zip -d .
           ls -la TelevizaApp
 
       - uses: actions/setup-java@v4
@@ -34,9 +40,11 @@ jobs:
           ANDROID_HOME: /usr/local/lib/android/sdk
         run: gradle assembleDebug --no-daemon
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: televizia-apk
-          path: TelevizaApp/app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 1
-          
+      - name: Publish APK as Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp TelevizaApp/app/build/outputs/apk/debug/app-debug.apk "televizia-v${VERSION}.apk"
+          gh release create "v${VERSION}-build${GITHUB_RUN_NUMBER}" "televizia-v${VERSION}.apk" \
+            --title "TELEVIZIA ${VERSION} (build ${GITHUB_RUN_NUMBER})" \
+            --notes "Android APK ${VERSION}"
