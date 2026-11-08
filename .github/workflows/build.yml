@@ -38,7 +38,7 @@ jobs:
         working-directory: TelevizaApp
         env:
           ANDROID_HOME: /usr/local/lib/android/sdk
-        run: gradle assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon --stacktrace
 
       - name: Publish APK as Release
         env:
