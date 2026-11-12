@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 env:
-  VERSION: "1.7.88"   # <-- ახალ ვერსიაზე მხოლოდ ეს ხაზი შეცვალე (zip-ის სახელი: televizia_android_app_v<VERSION>.zip)
+  VERSION: "1.7.89"   # <-- ახალ ვერსიაზე მხოლოდ ეს ხაზი შეცვალე (zip-ის სახელი: televizia_android_app_v<VERSION>.zip)
 
 jobs:
   build:
